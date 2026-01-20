@@ -2,12 +2,14 @@ package com.example.sunnyweather.logic
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.example.sunnyweather.logic.dao.PlaceDao
 import com.example.sunnyweather.logic.model.Place
 import com.example.sunnyweather.logic.model.Weather
 import com.example.sunnyweather.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlin.coroutines.CoroutineContext
 
 object Repository {
@@ -26,6 +28,7 @@ object Repository {
                 SunnyWeatherNetwork.getRealtimeWeather(lng, lat)
             }
             val deferredDaily = async {
+                delay(2000)
                 SunnyWeatherNetwork.getDailyWeather(lng, lat)
             }
             val realtimeResponse = deferredRealtime.await()
@@ -46,4 +49,10 @@ object Repository {
         }
         emit(result)
     }
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 }

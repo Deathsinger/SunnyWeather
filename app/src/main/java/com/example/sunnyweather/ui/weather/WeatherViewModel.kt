@@ -9,9 +9,9 @@ import com.example.sunnyweather.logic.model.Location
 class WeatherViewModel : ViewModel() {
     private val locationLiveData = MutableLiveData<Location>()
 
-    val locationLng = ""
-    val locationLat = ""
-    val placeName = ""
+    var locationLng = ""
+    var locationLat = ""
+    var placeName = ""
 
     val weatherLiveData = locationLiveData.switchMap {
         Repository.refreshWeather(it.lng, it.lat)
