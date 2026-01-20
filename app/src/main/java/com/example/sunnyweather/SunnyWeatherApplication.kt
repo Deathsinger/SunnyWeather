@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 
-const val tag = "liwei"
-
 class SunnyWeatherApplication : Application() {
     companion object {
         const val TOKEN = "mSfaKQ0sP1GuPuMY"
